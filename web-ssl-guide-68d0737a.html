@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mk体育 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f0f2f5;
+            color: #1e2a3a;
+            line-height: 1.7;
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        .page-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* header / hero 区域 — 知识库风格 */
+        .hero {
+            text-align: left;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #dce1e8;
+            padding-bottom: 1.8rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0b1c2f;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero h1 small {
+            font-weight: 400;
+            font-size: 1rem;
+            color: #5b6f84;
+            margin-left: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #2e4158;
+            max-width: 700px;
+            margin-top: 0.4rem;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #e6eef9;
+            color: #1e4976;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.2rem 0.75rem;
+            border-radius: 20px;
+            border: 1px solid #c6d6e8;
+            margin-top: 0.8rem;
+        }
+
+        /* 目录感布局：两列卡片网格 */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e5eaf0;
+            padding: 1.6rem 1.8rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #eef2f8;
+            color: #2c4c6e;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #13273e;
+            margin-bottom: 0.6rem;
+            border-left: 3px solid #8da6c2;
+            padding-left: 0.7rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.92rem;
+            color: #2e4057;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+
+        .card ul li {
+            padding: 0.25rem 0 0.25rem 1.2rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #7b93ac;
+        }
+
+        .card a {
+            color: #1d4e7a;
+            text-decoration: none;
+            border-bottom: 1px dotted #b7c9de;
+            font-weight: 500;
+        }
+
+        .card a:hover {
+            color: #0a2c4a;
+            border-bottom: 1px solid #1d4e7a;
+        }
+
+        /* 全宽卡片（提示区、说明区、相关信息区） */
+        .full-card {
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e5eaf0;
+            padding: 1.6rem 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .full-card h2 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #13273e;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .full-card h2 .icon-symbol {
+            font-size: 1.2rem;
+            color: #567494;
+        }
+
+        .full-card p, .full-card li {
+            font-size: 0.92rem;
+            color: #2e4057;
+        }
+
+        .full-card ul {
+            padding-left: 1.4rem;
+            margin: 0.4rem 0;
+        }
+
+        .full-card ul li {
+            margin-bottom: 0.2rem;
+        }
+
+        .full-card .meta-note {
+            background: #f3f7fb;
+            border-left: 3px solid #90aac5;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #1c3a5a;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.6rem;
+        }
+
+        .info-chip {
+            background: #eef3f9;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            border: 1px solid #d6e0eb;
+            color: #1d3855;
+        }
+
+        /* 提示区特别样式 */
+        .tip-block {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #f8faff;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #dae2ed;
+            margin-top: 0.6rem;
+        }
+
+        .tip-block .tip-icon {
+            font-size: 1.3rem;
+            min-width: 1.8rem;
+            color: #3a6690;
+        }
+
+        .tip-block p {
+            margin: 0;
+        }
+
+        /* FAQ 摘要 */
+        .faq-preview {
+            margin-top: 0.5rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eaedf2;
+            padding: 0.6rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            font-weight: 500;
+            color: #183652;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-item span {
+            font-size: 0.88rem;
+            color: #415b78;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: #5e738b;
+            border-top: 1px solid #dce3ec;
+            padding-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 720px) {
+            .directory-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .full-card {
+                padding: 1.3rem 1.2rem;
+            }
+
+            .card {
+                padding: 1.2rem 1.2rem;
+            }
+
+            body {
+                padding: 1.2rem 0.8rem 2rem;
+            }
+
+            .tip-block {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .hero h1 small {
+                display: block;
+                margin-left: 0;
+                font-size: 0.85rem;
+                margin-top: 0.2rem;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- hero 区域：再次访问、收藏、持续关注的线索 -->
+    <div class="hero">
+        <h1>
+            mk体育 · 知识库
+            <small>文献 · 路径 · 备忘</small>
+        </h1>
+        <p>
+            如果你曾经访问过这里，或者刚刚发现它——这个页面是你再次回来时的手边索引。
+            收藏、浏览、慢慢了解，不必匆忙。
+        </p>
+        <span class="badge">📌 持续关注 · 入口即目录</span>
+    </div>
+
+    <!-- 目录感布局：两列卡片 (介绍区 + 特点区) -->
+    <div class="directory-grid">
+        <!-- 卡片1: 介绍区 —— 从「再次访问」角度 -->
+        <div class="card">
+            <span class="tag">介绍</span>
+            <h2>关于 mk体育</h2>
+            <p>
+                它并不是一个需要额外解释的平台，而是一个你可以反复回来查找信息的地方。
+                无论你是第几次来到这里，<a href="https://web-ssl-mksport.com">mk体育</a> 都保持着一贯的简洁与直接。
+                没有复杂的手续，也没有冗余的引导。如果你习惯了快速定位内容，它的结构会让你觉得顺手。
+            </p>
+            <p style="margin-top:0.6rem; font-size:0.9rem;">
+                每次访问，你都会发现一些之前没留意的细节——这也是为什么值得把它放进书签。
+            </p>
+        </div>
+
+        <!-- 卡片2: 特点区 — 从收藏和持续关注角度 -->
+        <div class="card">
+            <span class="tag">特点</span>
+            <h2>为什么值得收藏</h2>
+            <ul>
+                <li>内容更新稳定，不频繁变动入口逻辑，适合长期关注。</li>
+                <li>页面轻量，加载快，无论使用何种设备都能顺畅浏览。</li>
+                <li>信息组织形式偏向实用，减少不必要的跳转。</li>
+                <li>如果你关注体育领域相关资讯，这里是一个扎实的起点。</li>
+            </ul>
+            <p style="margin-top:0.8rem;">
+                把链接放进收藏夹，下次需要时不必重新搜索。
+            </p>
+        </div>
+    </div>
+
+    <!-- 说明区：关于再次访问与书签使用 -->
+    <div class="full-card">
+        <h2><span class="icon-symbol">📂</span> 说明 · 关于“再次访问”</h2>
+        <p>
+            无论是隔了几天还是几个月，当你再次输入或点开 <a href="https://web-ssl-mksport.com">mk体育</a>，
+            它始终呈现一致的入口体验。没有突然变动的导航，也没有需要重新适应的界面。
+            这种稳定性对于需要周期性查阅内容的人来说非常友好。
+        </p>
+        <p style="margin-top:0.5rem;">
+            如果你希望建立一个固定的信息获取节奏，可以考虑将其设为浏览器书签栏的常驻项目。
+            收藏之后，每次访问都只是一次点击的距离。
+        </p>
+        <div class="meta-note">
+            💡 小提示：许多用户反馈，连续访问几次之后，对内容的熟悉度会明显提升，
+            查找效率也会比第一次高很多。
+        </div>
+    </div>
+
+    <!-- 提示区：温和的操作提醒 + 持续关注视角 -->
+    <div class="full-card">
+        <h2><span class="icon-symbol">📌</span> 提示区 · 持续关注与习惯</h2>
+        <div class="tip-block">
+            <div class="tip-icon">🔄</div>
+            <div>
+                <p>
+                    如果你希望保持对 <a href="https://web-ssl-mksport.com">mk体育</a> 的关注，
+                    可以每隔一段时间回来看看。内容会逐步补充，但不会铺天盖地。
+                    把访问变成一种轻量的习惯，而非任务。
+                </p>
+            </div>
+        </div>
+        <div class="tip-block" style="margin-top:0.7rem; background:#f5f9fe;">
+            <div class="tip-icon">⭐</div>
+            <div>
+                <p>
+                    收藏页面的同时，也可以顺便记录一下你感兴趣的模块。
+                    知识库风格的页面很适合用标签或笔记来辅助记忆。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 + FAQ 摘要 (融合) -->
+    <div class="full-card">
+        <h2><span class="icon-symbol">📋</span> 相关信息 · 常见关注点</h2>
+        <div class="info-row">
+            <span class="info-chip">内容分类偏重体育动态</span>
+            <span class="info-chip">入口稳定 · 无频繁改版</span>
+            <span class="info-chip">适合桌面与移动端</span>
+        </div>
+
+        <div class="faq-preview">
+            <div class="faq-item">
+                <strong>❓ 我是否需要注册或登录才能访问大部分内容？</strong>
+                <span>不需要。直接打开 <a href="https://web-ssl-mksport.com">mk体育</a> 即可浏览，无需额外步骤。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ 如何确保我下次还能快速找到这个页面？</strong>
+                <span>建议使用浏览器收藏功能（Ctrl+D / Cmd+D），或者添加到主屏幕（移动端）。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ 内容多久更新一次？</strong>
+                <span>更新节奏不定，但每次变化都能在页面中直接感知，无需订阅额外通知。</span>
+            </div>
+        </div>
+
+        <p style="margin-top:0.8rem; font-size:0.88rem; color:#3b5777;">
+            如果你想了解更多，可以自行浏览 <a href="https://web-ssl-mksport.com">mk体育</a> 的各个分区。
+            保持开放的心态，也许会有意外的收获。
+        </p>
+    </div>
+
+    <!-- 底部信息 / 再次提醒收藏 -->
+    <div class="footer-note">
+        <span>📎 知识库入口 · 随记</span>
+        <span>如果你觉得有用，不妨把 <a href="https://web-ssl-mksport.com" style="color:#1d4e7a; text-decoration:none; border-bottom:1px dotted #b0c4da;">mk体育</a> 加入书签</span>
+    </div>
+
+</div>
+</body>
+</html>
